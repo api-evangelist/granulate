@@ -1,0 +1,60 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/intel/gprofiler/blob/master/README.md
+name: gProfiler
+description: >-
+  gProfiler is Granulate's (Intel) open-source system-wide continuous profiler.
+  It runs as a single agent/executable (or container) on each host, combining
+  multiple sampling profilers (perf, py-spy, async-profiler, rbspy, PHP/.NET/
+  Node.js modes) into one flamegraph, optionally uploading results to the
+  Granulate Performance Studio. The binary is catalogued in packages/.
+license: Apache-2.0
+install:
+  - method: executable
+    command: >-
+      curl -sSL https://github.com/intel/gprofiler/releases/latest/download/gprofiler -o gprofiler && chmod +x gprofiler
+  - method: docker
+    command: docker pull granulate/gprofiler:latest
+usage: sudo ./gprofiler [options]
+flags:
+  runtime_modes:
+    - "--python-mode"
+    - "--java-mode"
+    - "--ruby-mode"
+    - "--php-mode"
+    - "--nodejs-mode"
+    - "--dotnet-mode"
+    - "--perf-mode"
+    - "--no-java"
+    - "--no-python"
+    - "--no-ruby"
+    - "--no-php"
+    - "--no-dotnet"
+  execution:
+    - "--continuous"
+    - "--profiling-duration"
+    - "--profiling-frequency"
+    - "--rotating-output"
+    - "--output-dir"
+    - "--no-flamegraph"
+    - "--pids"
+    - "--pid-file"
+    - "--log-file"
+  upload:
+    - "--upload-results"
+    - "--token"
+    - "--service-name"
+    - "--server-host"
+  metrics:
+    - "--enable-hw-metrics-collection"
+    - "--disable-metrics-collection"
+    - "--disable-metadata-collection"
+    - "--perfspect-path"
+key_flows:
+  - name: Continuous profiling with upload to Performance Studio
+    command: >-
+      docker run --name granulate-gprofiler -d --restart=on-failure:10
+      --pid=host --userns=host --privileged granulate/gprofiler:latest
+      -cu --token="$TOKEN" --service-name="$SERVICE"
+  - name: One-off local flamegraph
+    command: sudo ./gprofiler -o /tmp/results --output-dir /tmp/results

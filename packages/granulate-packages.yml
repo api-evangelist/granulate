@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/intel/gprofiler
+note: >-
+  Granulate (acquired by Intel in 2022, now Intel Tiber App-Level Optimization)
+  ships its open-source gProfiler continuous profiler as a container image, a
+  self-contained executable release binary, and cloud-marketplace images rather
+  than as language client libraries. The PyPI package named "gprofiler" is an
+  unrelated bioinformatics project (github.com/vals/python-gprofiler) and is NOT
+  first-party — deliberately excluded here.
+packages:
+  - language: docker
+    registry: docker-hub
+    name: granulate/gprofiler
+    url: https://hub.docker.com/r/granulate/gprofiler
+    install: docker pull granulate/gprofiler:latest
+    official: true
+    pulls: 15843360
+  - language: binary
+    registry: github-releases
+    name: gprofiler
+    url: https://github.com/intel/gprofiler/releases
+    install: >-
+      curl -sSL https://github.com/intel/gprofiler/releases/latest/download/gprofiler -o gprofiler && chmod +x gprofiler
+    official: true
+    latest: 1.57.1
+  - language: image
+    registry: cloud-marketplace
+    name: Intel Granulate Continuous Profiler
+    url: https://console.cloud.google.com/marketplace/product/granulate-public/real-time-continuous-optimization
+    install: Deploy the free public image via AWS, Azure, or GCP marketplace
+    official: true
