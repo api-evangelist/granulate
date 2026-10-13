@@ -1,0 +1,23 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://aws.amazon.com/marketplace/
+marketplace_apps: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=f18d4e62-52f7-4e47-891e-fb17b950a5f9
+  listing_count: 3
+  apps:
+  - Intel Granulate - Application Level Optimization
+  - Intel Granulate
+  - Intel Granulate
+  seller_name: Intel Granulate
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
